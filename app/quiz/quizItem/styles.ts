@@ -2,6 +2,10 @@ import { Button } from '@/app/atoms/button';
 import { Text } from '@/app/atoms/text';
 import { styled } from '@/styles/stitches.config';
 
+export const Question = styled(Text, {
+  margin: '10px 0',
+});
+
 export const OptionContainer = styled('div', {
   width: '80%',
   display: 'flex',

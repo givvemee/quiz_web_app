@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Text } from '../atoms/text';
 import { Container } from '../start/styles';
 import QuizItem from './quizItem';
+import { CurrentQuestion } from './styles';
 
 const Quiz = () => {
   const { push } = useRouter();
@@ -26,8 +27,9 @@ const Quiz = () => {
 
   return (
     <Container>
-      <Text>
-        {currentQuestionIndex + 1} / {quizList.length}
+      <Text type={'main'} isBold={'true'}>
+        <CurrentQuestion>{currentQuestionIndex + 1}</CurrentQuestion> /{' '}
+        {quizList.length}
       </Text>
       {currentQuestion && (
         <QuizItem

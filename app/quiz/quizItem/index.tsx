@@ -2,7 +2,12 @@ import { Answer } from '@/app/atoms/Answer';
 import { useStore } from '@/store';
 import { QuizListType } from '@/store/type';
 import { useState } from 'react';
-import { AnswerMessages, MoveNextButton, OptionContainer } from './styles';
+import {
+  AnswerMessages,
+  MoveNextButton,
+  OptionContainer,
+  Question,
+} from './styles';
 
 export type PropsType = {
   question: QuizListType['question'];
@@ -54,7 +59,9 @@ const QuizItem = ({
 
   return (
     <>
-      <p>{question}</p>
+      <Question isBold={'true'} type={'main'}>
+        {question}
+      </Question>
       <OptionContainer>
         {options.map((answer, index) => (
           <Answer

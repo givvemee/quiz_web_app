@@ -1,7 +1,7 @@
 import { styled } from '@/styles/stitches.config';
 
 export const AnswerStyled = styled('button', {
-  width: '40%',
+  width: '45%',
   height: '40px',
   display: 'flex',
   alignItems: 'center',
