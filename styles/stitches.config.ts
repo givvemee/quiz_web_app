@@ -7,14 +7,8 @@ export const { styled, getCssText, keyframes } = createStitches({
       subPrimary: '#279CF9',
       white: '#FFFFFF',
       black: '#000000',
-      gray333: '#333333',
       grayCCC: '#CCCCCC',
-      grayEEE: '#EEEEEE',
+      warning: '#FF6961',
     },
-  },
-
-  media: {
-    mobile: `(max-width: 767px)`,
-    pc: `(min-width: 768px)`,
   },
 });
