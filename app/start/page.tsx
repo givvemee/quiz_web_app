@@ -21,7 +21,7 @@ const StartQuiz = () => {
     const fetchQuizList = async () => {
       try {
         const response = await axios.get(
-          'https://opentdb.com/api.php?amount=10&category=24&type=multiple'
+          'https://opentdb.com/api.php?amount=10&type=multiple'
         );
         setQuizList(response.data.results);
       } catch (error) {

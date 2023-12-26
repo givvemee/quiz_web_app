@@ -21,7 +21,7 @@ export const AnswerStyled = styled('button', {
         border: '1px solid #8A98F1',
       },
       false: {
-        border: '1px solid red',
+        border: '1px solid #FF6961',
       },
       unselected: {
         border: '1px solid #CCC',

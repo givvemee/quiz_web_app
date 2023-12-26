@@ -1,7 +1,7 @@
-// Result.tsx
 'use client';
 
 import { useStore } from '@/store';
+import { ResponsivePie } from '@nivo/pie';
 import { useState } from 'react';
 import { Button } from '../atoms/button';
 import { Text } from '../atoms/text';
@@ -9,6 +9,7 @@ import { Container } from '../start/styles';
 import IncorrectAnswers from './inCorrectAnswer';
 import {
   ButtonWrapper,
+  ChartBox,
   InfoContainer,
   ResultContainer,
   SlideContainer,
@@ -38,29 +39,83 @@ const Result = () => {
   const corrects = answerList.filter((answer) => answer === 'O').length;
   const incorrects = answerList.filter((answer) => answer === 'X').length;
 
+  const data = [
+    { id: '정답', label: '정답', value: corrects },
+    { id: '오답', label: '오답', value: incorrects },
+  ];
+
   return (
     <>
       <Container>
-        <ResultContainer>
-          <InfoContainer>
-            <TotalTime type={'main'} isBold={'true'}>
+        <ResultContainer className={wrongAnswersNoteOpen ? 'flex' : ''}>
+          <InfoContainer className={wrongAnswersNoteOpen ? 'slideOut' : ''}>
+            <TotalTime type={'main'} isBold={'true'} align={'center'}>
               총 소요 시간 : <span>{formattedTime}</span>
             </TotalTime>
-            {corrects > 0 && <Text>정답을 {corrects}개 맞췄어요!</Text>}
+            {corrects > 0 && (
+              <Text align={'center'}>정답을 {corrects}개 맞췄어요!</Text>
+            )}
             {incorrects > 0 && (
-              <Text>
+              <Text align={'center'}>
                 아쉽게도 {answerList.filter((answer) => answer === 'X').length}
                 개의 오답이 있어요.
               </Text>
             )}
 
+            <ChartBox>
+              <ResponsivePie
+                data={data}
+                margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                innerRadius={0.5}
+                padAngle={3}
+                cornerRadius={0}
+                colors={['#8A98F1', '#FF6961']}
+                borderWidth={1.5}
+                arcLinkLabelsTextColor="black"
+                arcLinkLabelsThickness={2}
+                arcLinkLabelsColor={{ from: 'color' }}
+                theme={{
+                  labels: {
+                    text: {
+                      fontSize: 14,
+                      fill: '#000000',
+                    },
+                  },
+                  legends: {
+                    text: {
+                      fontSize: 12,
+                      fill: '#000000',
+                    },
+                  },
+                }}
+                legends={[
+                  {
+                    anchor: 'bottom',
+                    direction: 'row',
+                    translateX: 15,
+                    translateY: 50,
+                    itemsSpacing: 10,
+                    itemWidth: 80,
+                    itemHeight: 20,
+                    symbolShape: 'circle',
+                    effects: [
+                      {
+                        on: 'hover',
+                        style: {
+                          itemTextColor: 'black',
+                        },
+                      },
+                    ],
+                  },
+                ]}
+              />
+            </ChartBox>
             <ButtonWrapper>
               <Button onClick={() => setWrongAnswersNote((prev) => !prev)}>
                 오답노트 보기
               </Button>
             </ButtonWrapper>
           </InfoContainer>
-
           {wrongAnswersNoteOpen && (
             <SlideContainer className={wrongAnswersNoteOpen ? 'slideIn' : ''}>
               <IncorrectAnswers />

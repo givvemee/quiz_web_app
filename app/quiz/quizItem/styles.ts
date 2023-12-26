@@ -28,7 +28,7 @@ export const AnswerMessages = styled(Text, {
         color: '$primary',
       },
       false: {
-        color: 'red',
+        color: '$warning',
       },
     },
   },
