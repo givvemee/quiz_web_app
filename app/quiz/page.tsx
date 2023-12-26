@@ -1,32 +1,24 @@
 'use client';
 
-import { useStore } from '@/store';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Loading from '../atoms/Loading';
 import { Text } from '../atoms/text';
 import { Container } from '../start/styles';
+import { useHandlers } from './handlers';
 import QuizItem from './quizItem';
+import { useStates } from './states';
 import { CurrentQuestion } from './styles';
 
 const Quiz = () => {
-  const { push } = useRouter();
-  const { quizList, setEndTime, setQuizList, setIsLoading, isLoading } =
-    useStore();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [userAnswers, setUserAnswers] = useState<string[]>([]);
-  const [showResult, setShowResult] = useState<boolean>(false);
-  const currentQuestion = quizList[currentQuestionIndex];
-
-  const moveNextPage = () => {
-    if (currentQuestionIndex + 1 < quizList.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      setEndTime(Date.now());
-      setIsLoading(true);
-      push('/result');
-    }
-  };
+  const states = useStates();
+  const {
+    quizList,
+    setQuizList,
+    isLoading,
+    currentQuestion,
+    currentQuestionIndex,
+  } = states;
+  const { moveNextPage } = useHandlers(states);
 
   useEffect(() => {
     const storedQuizList = localStorage.getItem('quizList');
