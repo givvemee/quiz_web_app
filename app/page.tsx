@@ -1,3 +1,5 @@
+'use client';
+
 import '../styles/reset.css';
 import StartQuiz from './start/page';
 

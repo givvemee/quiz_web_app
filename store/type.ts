@@ -3,6 +3,7 @@ export type initialStateType = {
   startTime: number;
   endTime: number;
   answerList: AnswerType[];
+  isLoading: boolean;
 };
 
 export type QuizListType = {
@@ -21,6 +22,7 @@ export interface setInitialStateType {
   setStartTime: (time: number) => void;
   setEndTime: (time: number) => void;
   setAnswerList: (answer: AnswerType) => void;
+  setIsLoading: (loading: boolean) => void;
 }
 
 export interface StoreType extends initialStateType, setInitialStateType {}

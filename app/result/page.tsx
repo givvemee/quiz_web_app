@@ -27,7 +27,7 @@ const Result = () => {
     const seconds = timeDiffInSeconds % 60;
 
     const formattedTimeArray = [
-      hours > 0 ? `${hours}시` : null,
+      hours > 0 ? `${hours}시간` : null,
       minutes > 0 ? `${minutes}분` : null,
       seconds > 0 || (hours === 0 && minutes === 0) ? `${seconds}초` : null,
     ].filter(Boolean);

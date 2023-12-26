@@ -8,6 +8,7 @@ const initialState: initialStateType = {
   startTime: 0,
   endTime: 0,
   answerList: [],
+  isLoading: false,
 };
 
 export const useStore = create<StoreType>()(
@@ -35,6 +36,12 @@ export const useStore = create<StoreType>()(
       set((state) => ({
         ...state,
         answerList: [...state.answerList, answer],
+      }));
+    },
+    setIsLoading: (payload) => {
+      set((state) => ({
+        ...state,
+        isLoading: payload,
       }));
     },
   }))

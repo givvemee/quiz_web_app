@@ -37,9 +37,8 @@ export const SlideContainer = styled('div', {
   transform: 'translateX(100%)',
   animation: `${slideIn} 0.3s ease-in-out forwards`,
   width: '50%',
-  position: 'absolute',
-  top: 0,
-  right: 0,
+  maxHeight: '900px',
+  display: 'flex',
 });
 
 export const TotalTime = styled(Text, {
