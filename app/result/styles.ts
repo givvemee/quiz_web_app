@@ -54,10 +54,3 @@ export const ButtonWrapper = styled('div', {
   display: 'flex',
   justifyContent: 'center',
 });
-
-export const ChartBox = styled('div', {
-  width: '300px',
-  height: '300px',
-  margin: '0 auto',
-  zIndex: 1000,
-});
