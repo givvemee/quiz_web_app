@@ -4,7 +4,7 @@ import { DataType } from './type';
 
 const Chart = ({ data }: { data: DataType[] }) => {
   return (
-    <ChartBox>
+    <ChartBox className="chart">
       <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
