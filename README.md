@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### ✅ Installation
 
-## Getting Started
+코드는 저장소 복제, 의존성 설치, 개발 서버 실행의 간단한 스텝으로 이루어져 있으며, 다음 절차를 따릅니다.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
+```
+gh repo clone givvemee/quiz_web_app
+yarn
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🕸️ Related Links
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[Github Repository](https://github.com/givvemee/quiz_web_app)
+[Vercel Preview link](https://assignment-classting.vercel.app/)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 🛠 Libraries and Tools
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| 라이브러리 / 툴 | 이름                                             | 버전            | 목적      |
+| --------------- | ------------------------------------------------ | --------------- | --------- |
+|                 | [Zustand](https://www.npmjs.com/package/zustand) | v4.4.7 (latest) | 상태 관리 |
+|                 | [Stitches](https://stitches.dev/)                | v1.2.8          | 스타일    |
+|                 | Vercel                                           | -               | 배포      |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### 📚 File tree
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+📦app
+┣ 📂atoms
+┃ ┣ 📂Answer
+┃ ┣ 📂Button
+┃ ┣ 📂FlexBox
+┃ ┣ 📂Loading
+┃ ┣ 📂Icon
+┃ ┗ 📂Text
+┣ 📂quiz
+┃ ┗ 📂quizItem
+┣ 📂result
+┃ ┣ 📂Chart
+┃ ┗ 📂inCorrectAnswer
+┣ 📂start
+┣ 📜page.tsx
+┗ 📜layout.tsx
+📦store
+ ┣ 📜index.tsx
+ ┗ 📜type.ts
+📦styles
+ ┣ 📜StyleSheet.tsx
+ ┣ 📜reset.css
+ ┗ 📜stitches.config.ts
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+파일 구성 트리 구조입니다. 작업은 app dir 를 루트로 가지고, page route 에 배정될 수 있는 상위 컴포넌트 (`start`, `quiz`, `result`) 를 기준으로 하고, 해당 페이지에 부속으로 포함되는 컴포넌트 (`quizItem`, `Chart`...)를 하위 레벨로 배치하였습니다. 
+
+**style** : 루트에서 사용되는 `reset.css` 및 스타일 라이브러리를 사용하는 데에 필요한 configuration 을 담고 있습니다. 또한 Next 13 버전에서 css-in-js 를 적용하기 위한 `ServerStylesheet` 가 포함됩니다.<br />
+**atoms** : 텍스트, 버튼 등 재사용성이 가장 많은 작은 단위의 컴포넌트를 정의하였습니다.<br />
+**store** : 글로벌 전역 상태 관리 저장소입니다. props drilling 방지 및 상태 읽기, 쓰기에 편의성을 두기 위하여 작성하였습니다.<br />
+
+---
+
+### 🦚 Features
+
+주어진 정보의 양이 많지 않아 하나의 컨테이너 안에서 모든 정보의 열람이 가능하도록 페이지를 구현하였습니다.
+
+- [X] 사용자는 '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시작할 수 있다.
+    `/start` 에서 문제 풀기 버튼 클릭 시 `/quiz` 로 이동합니다. `/start` 페이지에서 fetching 된 10가지 문제를 글로벌 스토어, 로컬 스토리지에 저장 후 `/quiz` 페이지를 이탈해도 빈 화면 대신 문항을 볼 수 있도록 설계하였습니다. 
+- [X] 사용자는 문항에 대한 답안을 4개 보기 중에 선택할 수 있다.
+- [X] 답안 선택 후 다음 문항 버튼을 볼 수 있다.
+- [X] 사용자는 답안을 선택하면 다음 문항을 볼 수 있다.
+- [X] 답안이 맞았는지 틀렸는지 바로 알 수 있다.
+- [X] 다음 문항 버튼을 클릭하여 다음 문항으로 이동할 수 있다.
+    답안 선택 후 정답입니다! 혹은 오답입니다! 문구를 즉시 노출시킨 뒤, 다음 문제 버튼를 가시화하여 버튼을 클릭할 수 있도록 하였습니다. 추후 해당 문항들은 오답노트에 기록되어야 하기 때문에 문항 한번 선택 후 재선택을 할 수 없도록 선택지가 있다면 return 처리하였습니다.
+- [X] 모든 문항을 다 풀면 사용자는 다음과 같은 결과 정보를 볼 수 있다.
+  - 퀴즈를 마칠 때까지 소요된 시간
+  - 정답 개수
+  - 오답 수
+- [X] 정 오답에 대한 비율을 차트로 표기
+    현재 보고 있는 페이지가 10가지 문제 중 10번째일 경우, 다음 페이지를 로딩할 동안 짧게 Loading 컴포넌트를 노출시켰습니다. 클릭 버튼과 직결되어 처리되고 있다는 프로세스를 사용자가 보고 잠시 기다릴 수 있도록 설계하였습니다.또한, 
+    무응답이 없다는 가정 하에 (무응답이라면 다음으로 못 넘어가므로) 정/오답 선택지만 있을 것이라 판단했고 두 가지 legends의 가시성을 고려하여 `nivo/pie` 를 활용하였습니다. 
+- [X] 오답 노트 기능
+    오답노트 보기 버튼을 추가하여 기존에 기록된 문항과 실제 정답을 확인할 수 있도록 하였습니다. 
+
+---
+
+#### 그 밖의 참고사항
+1. **[테스트 코드 관련]** 일부 컴포넌트에 한하여 테스트 코드를 작성하였습니다. <br />
+    - 퀴즈 리스트 fetching 되는가 <br />
+    - fetch 된 리스트를 저장소에 담고 있는가<br />
+    - 퀴즈를 풀고 있다면 다음 페이지로 넘어가는 것이 유효한가 <br />
+    - 결과 화면에서 차트가 가시적인가 <br />
+    
+    위 사항들을 고려하여 단위 테스트를 작성하였습니다. 다만 테스트 코드는 꾸준한 학습 과정 중에 있기 때문에 테스트 작성 자체가 미흡한 점 너른 양해 부탁드립니다. 
+2. 디자이너와 협업하여 주어진 피그마 화면을 토대로 하여 레이아웃을 구성하는 개발에 익숙합니다. 그래서 예제 화면 이상으로 UI 를 구성하는 데에 레퍼런스를 찾아가며 고민을 많이 하였지만, 부족한 부분이 분명 있을 거라 생각됩니다. 이 점 양해 부탁드립니다.<br />
+4. 커밋과 브랜치 전략의 경우, feature 브랜치를 따서 개발 후 PR 을 올리고 PR 내용에 작업 내용을 작성하는 방식으로 작업을 해 왔지만, 이번에는 그러한 전략 없이 커밋 단위를 잘게 쪼개어 작업 내용을 간략한 커밋 메시지를 작성하는 것으로 대신하였습니다. <br />
+
+감사합니다.
