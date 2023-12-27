@@ -20,7 +20,7 @@ Object.defineProperty(window, 'localStorage', {
   value: mockLocalStorage,
 });
 
-jest.mock('../app/store', () => ({
+jest.mock('../store/index', () => ({
   useStore: jest.fn(() => ({
     quizList: [{ question: 'Sample Question' }],
     setQuizList: jest.fn(),
